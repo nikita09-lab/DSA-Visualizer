@@ -122,7 +122,7 @@
     const password = formData.get("password");
     const fullName = formData.get("fullName");
 
-    if (password.length < 6) {
+    if (password.length > 6) {
       showMessage("error", "Password must be at least 6 characters.");
       return;
     }
