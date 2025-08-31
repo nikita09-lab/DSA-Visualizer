@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentication System</title>
+    <title>REGISTRATION PAGE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -54,7 +54,7 @@
         <div class="flex justify-center mb-6">
             <div class="glass-effect rounded-full p-1 flex space-x-1">
                 <button onclick="showPage('signup')" id="signupTab" class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 bg-white text-purple-700">Sign Up</button>
-                <button onclick="showPage('signin')" id="signinTab" class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 text-white hover:bg-white/10">Sign In</button>
+                <button onclick="showPage('Login')" id="LoginTab" class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 text-white hover:bg-white/10">Sign In</button>
                 <button onclick="showPage('forgot')" id="forgotTab" class="px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 text-white hover:bg-white/10">Reset</button>
             </div>
         </div>
@@ -124,14 +124,14 @@
                     </div>
 
                     <div>
-                        <label for="signupConfirmEmail" class="block text-sm font-medium text-white mb-2">Confirm Email</label>
+                        <label for="signupPassword" class="block text-sm font-medium text-white mb-2">Password</label>
                         <input 
-                            type="email" 
-                            id="signupConfirmEmail" 
-                            name="confirmEmail" 
+                            type="password" 
+                            id="signupPassword" 
+                            name="password" 
                             required
                             class="input-focus w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 transition-all duration-200"
-                            placeholder="Confirm your email"
+                            placeholder="password"
                         >
                     </div>
 
@@ -425,10 +425,6 @@
             const username = formData.get('username');
             
             // Validation
-            if (email !== confirmEmail) {
-                showMessage('error', 'Email addresses do not match. Please check and try again.');
-                return;
-            }
             
             if (fullName.length < 2) {
                 showMessage('error', 'Please enter your full name.');
