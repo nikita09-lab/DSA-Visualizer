@@ -61,6 +61,117 @@
     </style>
 </head>
 
+<script type="module">
+  // Import Firebase
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import {
+    getAuth,
+    GoogleAuthProvider,
+    GithubAuthProvider,
+    signInWithPopup,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  // ✅ Your Firebase Config (keep this as-is but double check storageBucket spelling: must end with .appspot.com usually)
+  const firebaseConfig = {
+    apiKey: "AIzaSyC9aEFfbFywAROOmFeV_03pxGXkJjjDPYE",
+    authDomain: "dsa-d95f4.firebaseapp.com",
+    projectId: "dsa-d95f4",
+    storageBucket: "dsa-d95f4.appspot.com",
+    messagingSenderId: "292765848857",
+    appId: "1:292765848857:web:b87df6eaa31c9ae9a7a188",
+    measurementId: "G-P7MVMW71TF"
+  };
+
+  // 🔹 Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // 🔹 Google Login
+  window.signinWithGoogle = function () {
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        window.location.href = "home.html";
+      })
+      .catch((error) => {
+        showMessage("error", error.message);
+      });
+  };
+
+  // 🔹 GitHub Login
+  window.signinWithGitHub = function () {
+    const provider = new GithubAuthProvider();
+    signInWithPopup(auth, provider)
+      .then((result) => {
+            window.location.href = "home.html";
+
+      })
+      .catch((error) => {
+        showMessage("error", error.message);
+      });
+  };
+
+  // --- Sign Up with Email ---
+  document.getElementById("signupForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const email = formData.get("email");
+    const password = formData.get("password");
+    const fullName = formData.get("fullName");
+
+    if (password.length < 6) {
+      showMessage("error", "Password must be at least 6 characters.");
+      return;
+    }
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        showMessage("success", `Account created! Welcome ${fullName}`);
+        this.reset();
+        showPage("signin"); // auto-switch to login page
+      })
+      .catch((err) => showMessage("error", err.message));
+  });
+
+  // --- Sign In with Email ---
+  document.getElementById("signinForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        showMessage("success", `Welcome back ${result.user.email}`);
+        this.reset();
+        // window.location.href = "dashboard.html"; // ⬅ redirect if needed
+      })
+      .catch((err) => showMessage("error", err.message));
+  });
+
+  // --- Forgot Password ---
+  document.getElementById("forgotForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const email = new FormData(this).get("email");
+
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        showMessage("success", "Reset email sent! Check your inbox.");
+        this.reset();
+      })
+      .catch((err) => showMessage("error", err.message));
+  });
+
+  // --- Reuse the same Google/GitHub handlers for Sign Up buttons ---
+  window.signupWithGoogle = () => window.signinWithGoogle();
+  window.signupWithGitHub = () => window.signinWithGitHub();
+</script>
+
+
+
 <body class="gradient-bg min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-md">
         <!-- Navigation Pills -->

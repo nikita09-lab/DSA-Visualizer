@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Home Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height: 100%; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      line-height: 1.4;
+      color: #0f172a;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Container */
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+    /* NAV */
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; }
+    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
+    .logo { width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg,#7c3aed,#06b6d4); display:inline-grid; place-items:center; color:white; font-weight:700; }
+    .nav-links { display:flex; gap:16px; align-items:center; }
+    .nav-links a { text-decoration:none; color:#334155; padding:8px 12px; border-radius:8px; transition: background .18s, color .18s; }
+    .nav-links a:hover { background: #eef2ff; color:#3730a3; }
+    .btn { padding:10px 14px; border-radius:10px; background:#0ea5a4; color:white; text-decoration:none; font-weight:600; box-shadow:0 6px 18px rgba(14,165,164,0.12); }
+    .ghost { background:transparent; border:1px solid #e6eef2; }
+
+    /* HERO */
+    .hero { display:grid; grid-template-columns:1fr; gap:28px; align-items:center; padding:48px 0; }
+    .hero-left h1 { font-size: clamp(28px, 5vw, 44px); line-height:1.05; margin-bottom:12px; }
+    .hero-left p { color:#64748b; margin-bottom:18px; }
+    .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
+    .hero-ill { width:100%; border-radius:14px; background:linear-gradient(135deg,#e0f2fe,#eef2ff); padding:18px; display:flex; justify-content:center; align-items:center; }
+    .card { background:white; padding:18px; border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.06); width:100%; }
+
+    /* FEATURES */
+    .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin:28px 0; }
+    .feature { background:linear-gradient(180deg,#ffffff,#fbfdff); padding:18px; border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,0.04); }
+    .feature h3 { margin-bottom:8px; }
+    .feature p { color:#64748b; font-size:14px; }
+
+    /* FOOTER */
+    footer { margin-top:36px; padding:28px 0 60px; border-top:1px solid #eef2f7; }
+    .footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px; }
+    .muted { color:#64748b; font-size:14px; }
+
+    /* Responsive */
+    @media (min-width: 900px) {
+      .hero { grid-template-columns: 1fr 460px; }
+      .hero-ill { padding:28px; }
+    }
+
+    /* Tiny helpers */
+    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-weight:600; color:#3730a3; font-size:13px; }
+  </style>
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <a class="brand" href="#">
+        <div class="logo">MP</div>
+        <div>
+          <div style="font-weight:700;">MyProject</div>
+          <div style="font-size:12px;color:#64748b">Simple & clean homepage</div>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#get-started">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <span class="pill">New • Free</span>
+        <h1>Build faster. Launch sooner. Impress users.</h1>
+        <p>Clean, responsive homepage template with a modern aesthetic — ready to adapt to your project. Includes navigation, hero, features and footer. Copy, paste & customize.</p>
+        <div class="cta-row">
+          <a class="btn" href="#get-started">Start Free</a>
+          <a class="ghost" href="#learn">Learn More</a>
+        </div>
+
+        <div style="margin-top:22px; display:flex; gap:12px; align-items:center;">
+          <div class="card" style="max-width:360px;">
+            <strong>Trusted by students & creators</strong>
+            <div style="margin-top:8px; color:#64748b; font-size:14px;">Built for clarity and speed. Use this as a starting point for landing pages or portfolio sites.</div>
+          </div>
+
+        </div>
+      </div>
+
+      <aside class="hero-ill">
+        <div style="max-width:420px; width:100%;">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='220' viewBox='0 0 600 220'><rect rx='16' width='600' height='220' fill='%23eef2ff'/><g transform='translate(24,20)'><rect x='0' y='0' width='240' height='36' rx='8' fill='%237c3aed'/><rect x='260' y='0' width='320' height='36' rx='8' fill='%2306b6d4'/><rect x='0' y='60' width='580' height='18' rx='6' fill='%23c7f0ff'/><rect x='0' y='90' width='320' height='18' rx='6' fill='%23def3ff'/><rect x='0' y='132' width='240' height='64' rx='12' fill='white' stroke='%23e6eef2' /></g></svg>" alt="illustration" style="width:100%; border-radius:10px; display:block;" />
+        </div>
+      </aside>
+    </section>
+
+    <section id="features" class="features">
+      <div class="feature">
+        <h3>Fast setup</h3>
+        <p>Copy this file and you have a polished homepage ready to edit. No build tools required.</p>
+      </div>
+      <div class="feature">
+        <h3>Responsive</h3>
+        <p>Looks great on mobiles, tablets and desktops — built with fluid sizing and simple breakpoints.</p>
+      </div>
+      <div class="feature">
+        <h3>Customizable</h3>
+        <p>Easily change colors, typography, and layout to match your brand or project needs.</p>
+      </div>
+      <div class="feature">
+        <h3>Accessible</h3>
+        <p>Clean semantic markup and sensible color contrast for better accessibility out of the box.</p>
+      </div>
+    </section>
+
+    <section id="about" style="margin-top:12px; display:grid; gap:12px;">
+      <div class="card">
+        <h3>About this template</h3>
+        <p class="muted">This single-file HTML + CSS template is intentionally minimal so beginners can understand structure, and experienced devs can quickly modify or expand it. Add your images, replace the logo, or integrate with your backend or static site generator.</p>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:18px;">
+      <div class="card">
+        <h3>Contact</h3>
+        <p class="muted">Want this extended (hero animation, multi-section, or dark mode)? Tell me what you want and I will customise it.</p>
+        <form style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
+          <input placeholder="Your name" style="flex:1; min-width:180px; padding:10px; border-radius:8px; border:1px solid #e6eef2" />
+          <input placeholder="Email" style="flex:1; min-width:180px; padding:10px; border-radius:8px; border:1px solid #e6eef2" />
+          <button class="btn" type="button" id="get-started">Send</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div>
+        <strong>MyProject</strong>
+        <div class="muted">Making small ideas into neat pages.</div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:8px;">Links</div>
+        <div class="muted">Features • About • Contact</div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:8px;">Legal</div>
+        <div class="muted">Privacy • Terms</div>
+      </div>
+      <div>
+        <div style="font-weight:700; margin-bottom:8px;">Get in touch</div>
+        <div class="muted">hello@example.com</div>
+      </div>
+    </div>
+    <div style="margin-top:18px; color:#94a3b8; font-size:13px;">© " + new Date().getFullYear() + " MyProject — All rights reserved.</div>
+  </footer>
+
+</body>
+</html>
