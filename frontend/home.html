@@ -1,175 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>My Home Page</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* Reset & base */
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html,body { height: 100%; }
-    body {
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-      line-height: 1.4;
-      color: #0f172a;
-      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Container */
-    .container { max-width: 1100px; margin: 0 auto; padding: 24px; }
-
-    /* NAV */
-    .nav { display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0; }
-    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit; }
-    .logo { width:44px; height:44px; border-radius:10px; background:linear-gradient(135deg,#7c3aed,#06b6d4); display:inline-grid; place-items:center; color:white; font-weight:700; }
-    .nav-links { display:flex; gap:16px; align-items:center; }
-    .nav-links a { text-decoration:none; color:#334155; padding:8px 12px; border-radius:8px; transition: background .18s, color .18s; }
-    .nav-links a:hover { background: #eef2ff; color:#3730a3; }
-    .btn { padding:10px 14px; border-radius:10px; background:#0ea5a4; color:white; text-decoration:none; font-weight:600; box-shadow:0 6px 18px rgba(14,165,164,0.12); }
-    .ghost { background:transparent; border:1px solid #e6eef2; }
-
-    /* HERO */
-    .hero { display:grid; grid-template-columns:1fr; gap:28px; align-items:center; padding:48px 0; }
-    .hero-left h1 { font-size: clamp(28px, 5vw, 44px); line-height:1.05; margin-bottom:12px; }
-    .hero-left p { color:#64748b; margin-bottom:18px; }
-    .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
-    .hero-ill { width:100%; border-radius:14px; background:linear-gradient(135deg,#e0f2fe,#eef2ff); padding:18px; display:flex; justify-content:center; align-items:center; }
-    .card { background:white; padding:18px; border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.06); width:100%; }
-
-    /* FEATURES */
-    .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:18px; margin:28px 0; }
-    .feature { background:linear-gradient(180deg,#ffffff,#fbfdff); padding:18px; border-radius:12px; box-shadow:0 6px 20px rgba(2,6,23,0.04); }
-    .feature h3 { margin-bottom:8px; }
-    .feature p { color:#64748b; font-size:14px; }
-
-    /* FOOTER */
-    footer { margin-top:36px; padding:28px 0 60px; border-top:1px solid #eef2f7; }
-    .footer-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:16px; }
-    .muted { color:#64748b; font-size:14px; }
-
-    /* Responsive */
-    @media (min-width: 900px) {
-      .hero { grid-template-columns: 1fr 460px; }
-      .hero-ill { padding:28px; }
-    }
-
-    /* Tiny helpers */
-    .pill { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-weight:600; color:#3730a3; font-size:13px; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Visualizer - Master Data Structures & Algorithms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .gradient-purple { background: linear-gradient(135deg, #a855f7 0%, #7c3aed 100%); }
+        .gradient-light { background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(139, 92, 246, 0.2); }
+        .scroll-to-top { opacity: 0; transition: opacity 0.3s ease; }
+        .scroll-to-top.visible { opacity: 1; }
+        .hero-animation { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+    </style>
 </head>
-<body>
-  <header class="container">
-    <nav class="nav">
-      <a class="brand" href="#">
-        <div class="logo">MP</div>
-        <div>
-          <div style="font-weight:700;">MyProject</div>
-          <div style="font-size:12px;color:#64748b">Simple & clean homepage</div>
+<body class="bg-white">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-purple-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 gradient-purple rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xl font-bold text-gray-900">DSA Visualizer</span>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Home</a>
+                    <a href="#courses" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Courses</a>
+                    <a href="#features" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Features</a>
+                    <a href="#testimonials" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Testimonials</a>
+                    <a href="#contact" class="text-gray-700 hover:text-purple-600 font-medium transition-colors">Contact</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <button class="text-purple-600 hover:text-purple-700 font-medium transition-colors">Login</button>
+                    <button class="gradient-purple text-white px-6 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Sign Up</button>
+                </div>
+            </div>
         </div>
-      </a>
+    </header>
 
-      <div class="nav-links">
-        <a href="#features">Features</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="btn" href="#get-started">Get Started</a>
-      </div>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="hero">
-      <div class="hero-left">
-        <span class="pill">New • Free</span>
-        <h1>Build faster. Launch sooner. Impress users.</h1>
-        <p>Clean, responsive homepage template with a modern aesthetic — ready to adapt to your project. Includes navigation, hero, features and footer. Copy, paste & customize.</p>
-        <div class="cta-row">
-          <a class="btn" href="#get-started">Start Free</a>
-          <a class="ghost" href="#learn">Learn More</a>
+    <!-- Hero Section -->
+    <section id="home" class="relative overflow-hidden gradient-light py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                        Master DSA with 
+                        <span class="gradient-purple bg-clip-text text-transparent">Visual Insights</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 leading-relaxed">
+                        Track your progress, visualize time spent, and stay consistent on your DSA journey with our comprehensive learning platform.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="gradient-purple text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity">
+                            Get Started
+                        </button>
+                        <button class="border-2 border-purple-300 text-purple-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-purple-50 transition-colors">
+                            View Courses
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="hero-animation">
+                        <svg class="w-full h-96" viewBox="0 0 400 300" fill="none">
+                            <!-- Student with laptop -->
+                            <circle cx="200" cy="120" r="25" fill="#a855f7"/>
+                            <rect x="175" y="145" width="50" height="60" rx="25" fill="#7c3aed"/>
+                            <rect x="160" y="180" width="80" height="40" rx="8" fill="#e9d5ff"/>
+                            <rect x="170" y="190" width="60" height="2" fill="#a855f7"/>
+                            <rect x="170" y="195" width="45" height="2" fill="#a855f7"/>
+                            <rect x="170" y="200" width="55" height="2" fill="#a855f7"/>
+                            
+                            <!-- Floating code elements -->
+                            <g class="animate-pulse">
+                                <rect x="280" y="80" width="60" height="30" rx="6" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+                                <text x="310" y="100" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="600">Array</text>
+                            </g>
+                            
+                            <g class="animate-pulse" style="animation-delay: 1s;">
+                                <circle cx="320" cy="160" r="20" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+                                <text x="320" y="165" text-anchor="middle" fill="#7c3aed" font-size="10" font-weight="600">Tree</text>
+                            </g>
+                            
+                            <g class="animate-pulse" style="animation-delay: 2s;">
+                                <rect x="100" y="60" width="50" height="25" rx="4" fill="#f3e8ff" stroke="#a855f7" stroke-width="2"/>
+                                <text x="125" y="77" text-anchor="middle" fill="#7c3aed" font-size="10" font-weight="600">Graph</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div style="margin-top:22px; display:flex; gap:12px; align-items:center;">
-          <div class="card" style="max-width:360px;">
-            <strong>Trusted by students & creators</strong>
-            <div style="margin-top:8px; color:#64748b; font-size:14px;">Built for clarity and speed. Use this as a starting point for landing pages or portfolio sites.</div>
-          </div>
-
-        </div>
-      </div>
-
-      <aside class="hero-ill">
-        <div style="max-width:420px; width:100%;">
-          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='220' viewBox='0 0 600 220'><rect rx='16' width='600' height='220' fill='%23eef2ff'/><g transform='translate(24,20)'><rect x='0' y='0' width='240' height='36' rx='8' fill='%237c3aed'/><rect x='260' y='0' width='320' height='36' rx='8' fill='%2306b6d4'/><rect x='0' y='60' width='580' height='18' rx='6' fill='%23c7f0ff'/><rect x='0' y='90' width='320' height='18' rx='6' fill='%23def3ff'/><rect x='0' y='132' width='240' height='64' rx='12' fill='white' stroke='%23e6eef2' /></g></svg>" alt="illustration" style="width:100%; border-radius:10px; display:block;" />
-        </div>
-      </aside>
     </section>
 
-    <section id="features" class="features">
-      <div class="feature">
-        <h3>Fast setup</h3>
-        <p>Copy this file and you have a polished homepage ready to edit. No build tools required.</p>
-      </div>
-      <div class="feature">
-        <h3>Responsive</h3>
-        <p>Looks great on mobiles, tablets and desktops — built with fluid sizing and simple breakpoints.</p>
-      </div>
-      <div class="feature">
-        <h3>Customizable</h3>
-        <p>Easily change colors, typography, and layout to match your brand or project needs.</p>
-      </div>
-      <div class="feature">
-        <h3>Accessible</h3>
-        <p>Clean semantic markup and sensible color contrast for better accessibility out of the box.</p>
-      </div>
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Powerful Features for Your Success</h2>
+                <p class="text-xl text-gray-600">Everything you need to master data structures and algorithms</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-white p-8 rounded-xl border border-purple-100 shadow-lg">
+                    <div class="w-12 h-12 gradient-purple rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Topic-wise Progress</h3>
+                    <p class="text-gray-600">Track your mastery across different DSA topics with detailed analytics and visual progress indicators.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-xl border border-purple-100 shadow-lg">
+                    <div class="w-12 h-12 gradient-purple rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Time Analytics</h3>
+                    <p class="text-gray-600">Visualize your study patterns with beautiful charts showing time spent on each topic and concept.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-xl border border-purple-100 shadow-lg">
+                    <div class="w-12 h-12 gradient-purple rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Study Goals</h3>
+                    <p class="text-gray-600">Set daily and weekly goals to maintain consistency and build lasting study habits.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-xl border border-purple-100 shadow-lg">
+                    <div class="w-12 h-12 gradient-purple rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Gamified Milestones</h3>
+                    <p class="text-gray-600">Earn badges and unlock achievements as you progress through your DSA learning journey.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-xl border border-purple-100 shadow-lg">
+                    <div class="w-12 h-12 gradient-purple rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Learning Paths</h3>
+                    <p class="text-gray-600">Follow structured curricula designed by experts to guide you from beginner to advanced levels.</p>
+                </div>
+                
+                <div class="card-hover bg-white p-8 rounded-xl border border-purple-100 shadow-lg">
+                    <div class="w-12 h-12 gradient-purple rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-3">Visual Learning</h3>
+                    <p class="text-gray-600">Interactive visualizations help you understand complex algorithms and data structures intuitively.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="about" style="margin-top:12px; display:grid; gap:12px;">
-      <div class="card">
-        <h3>About this template</h3>
-        <p class="muted">This single-file HTML + CSS template is intentionally minimal so beginners can understand structure, and experienced devs can quickly modify or expand it. Add your images, replace the logo, or integrate with your backend or static site generator.</p>
-      </div>
+    <!-- Course Preview Section -->
+    <section id="courses" class="py-20 gradient-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Explore DSA Topics</h2>
+                <p class="text-xl text-gray-600">Comprehensive modules covering all essential data structures and algorithms</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Arrays & Strings</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Beginner</span>
+                        <span class="text-sm text-gray-500">12 lessons</span>
+                    </div>
+                    <button class="w-full gradient-purple text-white py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Start Now</button>
+                </div>
+                
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">🌳</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Trees & Graphs</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Intermediate</span>
+                        <span class="text-sm text-gray-500">18 lessons</span>
+                    </div>
+                    <button class="w-full gradient-purple text-white py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Start Now</button>
+                </div>
+                
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">⚡</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Dynamic Programming</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Advanced</span>
+                        <span class="text-sm text-gray-500">15 lessons</span>
+                    </div>
+                    <button class="w-full gradient-purple text-white py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Start Now</button>
+                </div>
+                
+                <div class="card-hover bg-white p-6 rounded-xl shadow-lg">
+                    <div class="text-4xl mb-4">🔍</div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Searching & Sorting</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Intermediate</span>
+                        <span class="text-sm text-gray-500">10 lessons</span>
+                    </div>
+                    <button class="w-full gradient-purple text-white py-2 rounded-lg font-medium hover:opacity-90 transition-opacity">Start Now</button>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section id="contact" style="margin-top:18px;">
-      <div class="card">
-        <h3>Contact</h3>
-        <p class="muted">Want this extended (hero animation, multi-section, or dark mode)? Tell me what you want and I will customise it.</p>
-        <form style="margin-top:12px; display:flex; gap:8px; flex-wrap:wrap;">
-          <input placeholder="Your name" style="flex:1; min-width:180px; padding:10px; border-radius:8px; border:1px solid #e6eef2" />
-          <input placeholder="Email" style="flex:1; min-width:180px; padding:10px; border-radius:8px; border:1px solid #e6eef2" />
-          <button class="btn" type="button" id="get-started">Send</button>
-        </form>
-      </div>
+    <!-- Dashboard Preview -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Your Learning Dashboard</h2>
+                <p class="text-xl text-gray-600">Track your progress with beautiful analytics and insights</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-2xl p-8 border-2 border-dashed border-purple-200">
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">Study Time</h3>
+                            <div class="text-2xl">⏰</div>
+                        </div>
+                        <div class="text-3xl font-bold text-purple-600">24.5h</div>
+                        <div class="text-sm text-gray-500">This week</div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">Completed</h3>
+                            <div class="text-2xl">✅</div>
+                        </div>
+                        <div class="text-3xl font-bold text-purple-600">47</div>
+                        <div class="text-sm text-gray-500">Problems solved</div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-semibold text-gray-900">Streak</h3>
+                            <div class="text-2xl">🔥</div>
+                        </div>
+                        <div class="text-3xl font-bold text-purple-600">12</div>
+                        <div class="text-sm text-gray-500">Days in a row</div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="gradient-purple text-white px-8 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity">
+                        Log in to see your progress
+                    </button>
+                </div>
+            </div>
+        </div>
     </section>
 
-  </main>
-
-  <footer class="container">
-    <div class="footer-grid">
-      <div>
-        <strong>MyProject</strong>
-        <div class="muted">Making small ideas into neat pages.</div>
-      </div>
-      <div>
-        <div style="font-weight:700; margin-bottom:8px;">Links</div>
-        <div class="muted">Features • About • Contact</div>
-      </div>
-      <div>
-        <div style="font-weight:700; margin-bottom:8px;">Legal</div>
-        <div class="muted">Privacy • Terms</div>
-      </div>
-      <div>
-        <div style="font-weight:700; margin-bottom:8px;">Get in touch</div>
-        <div class="muted">hello@example.com</div>
-      </div>
-    </div>
-    <div style="margin-top:18px; color:#94a3b8; font-size:13px;">© " + new Date().getFullYear() + " MyProject — All rights reserved.</div>
-  </footer>
-
-</body>
-</html>
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 gradient-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Learners Say</h2>
+                <p class="text-xl text-gray-600">Join thousands of successful DSA learners</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
+                            <span class="text-purple-600 font-semibold">AS</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900">Alex Smith</h4>
+                            <p class="text-sm text-gray-500">Software Engineer</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"The visual approach to learning DSA is incredible. I finally understand complex algorithms that seemed impossible before!"</p>
