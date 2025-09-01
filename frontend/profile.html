@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - DSA Visualizer</title> <!-- 🔥 EDIT THIS: Change page title -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.35s;
+            transform-origin: 50% 50%;
+        }
+        
+        .achievement-glow {
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white">
+    <!-- Header -->
+    <header class="glass-effect border-b p-4">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-lg flex items-center justify-center">
+                    <span class="text-xl font-bold">🧠</span>
+                </div>
+                <h1 class="text-xl font-bold">DSA Visualizer</h1> <!-- 🔥 EDIT THIS: Change your app name -->
+            </div>
+            <nav class="flex items-center space-x-6">
+                <!-- 🔥 EDIT THIS: Update navigation links to your actual pages -->
+                <a href="#" class="text-gray-300 hover:text-white transition-colors">Dashboard</a> <!-- ← Link to dashboard -->
+                <a href="#" class="text-white font-medium">Profile</a> <!-- ← Current page -->
+                <a href="#" class="text-gray-300 hover:text-white transition-colors">Leaderboard</a> <!-- ← Link to leaderboard -->
+                <button id="logoutBtn" ... onclick="logout()" class="glass-effect px-4 py-2 rounded-lg text-sm font-medium hover:bg-white/20 transition-colors" >
+                    Logout
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto p-6 space-y-8">
+        <!-- Profile Header -->
+        <div class="glass-effect rounded-2xl p-8">
+            <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
+                <!-- Avatar and Basic Info -->
+                <div class="text-center md:text-left">
+                    <div class="w-32 h-32 bg-gradient-to-r from-indigo-400 to-purple-500 rounded-full flex items-center justify-center text-4xl font-bold mb-4 mx-auto md:mx-0">
+                        AK
+                    </div>
+                    <h2 class="text-3xl font-bold mb-2">Alex Kumar</h2>
+                    <p class="text-gray-300 mb-2">@alexkumar_dev</p>
+                    <div class="flex items-center justify-center md:justify-start space-x-2 text-sm text-gray-400">
+                        <span>🗓️ Joined March 2024</span>
+                    </div>
+                </div>
+
+                <!-- Level Progress -->
+                <div class="flex-1 max-w-md">
+                    <div class="bg-black/30 rounded-xl p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">Level Progress</h3>
+                            <span class="text-2xl">⭐</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <div class="relative w-20 h-20">
+                                <svg class="progress-ring w-20 h-20" viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="54" stroke="rgba(255,255,255,0.1)" stroke-width="8" fill="transparent"/>
+                                    <circle cx="60" cy="60" r="54" stroke="url(#gradient)" stroke-width="8" fill="transparent" 
+                                            stroke-dasharray="339.292" stroke-dashoffset="101.788" class="progress-ring-circle"/>
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" style="stop-color:#667eea"/>
+                                            <stop offset="100%" style="stop-color:#764ba2"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <span class="text-xl font-bold">12</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-300">Current Level</p>
+                                <p class="text-2xl font-bold text-indigo-300">Level 12</p>
+                                <p class="text-xs text-gray-400">2,340 / 3,000 XP</p>
+                                <div class="w-32 bg-gray-700 rounded-full h-2 mt-2">
+                                    <div class="bg-gradient-to-r from-indigo-400 to-purple-500 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="stat-card glass-effect rounded-xl p-6 border-indigo-400/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-medium text-gray-300">Problems Solved</h3>
+                    <span class="text-2xl">🎯</span>
+                </div>
+                <p class="text-3xl font-bold text-indigo-300">247</p>
+                <p class="text-xs text-gray-400 mt-1">+12 this week</p>
+            </div>
+
+            <div class="stat-card glass-effect rounded-xl p-6 border-green-400/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-medium text-gray-300">Streak</h3>
+                    <span class="text-2xl">🔥</span>
+                </div>
+                <p class="text-3xl font-bold text-green-300">15 days</p>
+                <p class="text-xs text-gray-400 mt-1">Personal best: 28</p>
+            </div>
+
+            <div class="stat-card glass-effect rounded-xl p-6 border-purple-400/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-medium text-gray-300">Achievements</h3>
+                    <span class="text-2xl">🏆</span>
+                </div>
+                <p class="text-3xl font-bold text-purple-300">18</p>
+                <p class="text-xs text-gray-400 mt-1">3 unlocked recently</p>
+            </div>
+
+            <div class="stat-card glass-effect rounded-xl p-6 border-orange-400/30">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-sm font-medium text-gray-300">Study Time</h3>
+                    <span class="text-2xl">⏱️</span>
+                </div>
+                <p class="text-3xl font-bold text-orange-300">42h</p>
+                <p class="text-xs text-gray-400 mt-1">This month</p>
+            </div>
+        </div>
+
+        <!-- Recent Achievements & Activity -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Achievements -->
+            <div class="glass-effect rounded-2xl p-6">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">🏆</span>
+                    Recent Achievements
+                </h3>
+                <div class="space-y-4">
+                    <div class="achievement-glow bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-lg p-4 border border-yellow-500/30">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🥇</span>
+                            <div>
+                                <p class="font-semibold">Binary Tree Master</p>
+                                <p class="text-sm text-gray-400">Solved 50 tree problems</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg p-4 border border-blue-500/30">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">⚡</span>
+                            <div>
+                                <p class="font-semibold">Speed Demon</p>
+                                <p class="text-sm text-gray-400">Solved 10 problems in under 5 minutes</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-r from-green-500/20 to-teal-500/20 rounded-lg p-4 border border-green-500/30">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl">🎯</span>
+                            <div>
+                                <p class="font-semibold">Perfect Week</p>
+                                <p class="text-sm text-gray-400">7 days of consistent practice</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="glass-effect rounded-2xl p-6">
+                <h3 class="text-xl font-bold mb-6 flex items-center">
+                    <span class="mr-2">📊</span>
+                    Recent Activity
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-black/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm">✓</div>
+                            <div>
+                                <p class="font-medium">Two Sum</p>
+                                <p class="text-sm text-gray-400">Array • Easy</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400">2 hours ago</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-black/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm">✓</div>
+                            <div>
+                                <p class="font-medium">Binary Tree Inorder</p>
+                                <p class="text-sm text-gray-400">Tree • Medium</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400">5 hours ago</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-black/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-sm">⏸</div>
+                            <div>
+                                <p class="font-medium">Merge K Sorted Lists</p>
+                                <p class="text-sm text-gray-400">Linked List • Hard</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400">1 day ago</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-black/20 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm">✓</div>
+                            <div>
+                                <p class="font-medium">Valid Parentheses</p>
+                                <p class="text-sm text-gray-400">Stack • Easy</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-400">2 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Progress -->
+        <div class="glass-effect rounded-2xl p-6">
+            <h3 class="text-xl font-bold mb-6 flex items-center">
+                <span class="mr-2">📈</span>
+                Skills Progress
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Arrays & Strings</span>
+                        <span class="text-sm text-gray-400">85%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-indigo-400 to-indigo-500 h-3 rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Trees & Graphs</span>
+                        <span class="text-sm text-gray-400">72%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-green-400 to-green-500 h-3 rounded-full" style="width: 72%"></div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Dynamic Programming</span>
+                        <span class="text-sm text-gray-400">58%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-purple-400 to-purple-500 h-3 rounded-full" style="width: 58%"></div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Sorting & Searching</span>
+                        <span class="text-sm text-gray-400">91%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-orange-400 to-orange-500 h-3 rounded-full" style="width: 91%"></div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Linked Lists</span>
+                        <span class="text-sm text-gray-400">67%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-teal-400 to-teal-500 h-3 rounded-full" style="width: 67%"></div>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">Recursion</span>
+                        <span class="text-sm text-gray-400">43%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3">
+                        <div class="bg-gradient-to-r from-red-400 to-red-500 h-3 rounded-full" style="width: 43%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            GithubAuthProvider,
+            signInWithPopup,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            sendPasswordResetEmail,
+            updateProfile,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+        // 🔥 EDIT THIS: Replace with your own Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC9aEFfbFywAROOmFeV_03pxGXkJjjDPYE", // ← Your API key
+            authDomain: "dsa-d95f4.firebaseapp.com", // ← Your auth domain
+            projectId: "dsa-d95f4", // ← Your project ID
+            storageBucket: "dsa-d95f4.appspot.com", // ← Your storage bucket
+            messagingSenderId: "292765848857", // ← Your messaging sender ID
+            appId: "1:292765848857:web:b87df6eaa31c9ae9a7a188", // ← Your app ID
+            measurementId: "G-P7MVMW71TF" // ← Your measurement ID
+        };
+
+        // 🔹 Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // User profile data structure
+        let userProfile = {
+            name: 'Loading...',
+            username: 'loading',
+            avatar: null,
+            email: '',
+            provider: 'demo',
+            joinDate: new Date().toLocaleDateString(),
+            level: 1,
+            xp: 0,
+            maxXp: 1000,
+            stats: {
+                problemsSolved: 0,
+                streak: 0,
+                achievements: 0,
+                studyTime: 0
+            },
+            skills: {
+                'Arrays & Strings': 0,
+                'Trees & Graphs': 0,
+                'Dynamic Programming': 0,
+                'Sorting & Searching': 0,
+                'Linked Lists': 0,
+                'Recursion': 0
+            },
+            recentActivity: [],
+            achievements: []
+        };
+
+        // Firebase Authentication State Listener
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                loadFirebaseUserProfile(user);
+            } else {
+                // User is signed out
+                loadDemoProfile();
+            }
+        });
+
+        // Function to load user data from Firebase
+        async function loadFirebaseUserProfile(user) {
+            try {
+                userProfile.name = user.displayName || user.email.split('@')[0];
+                userProfile.username = user.email ? user.email.split('@')[0] : 'user';
+                userProfile.email = user.email || '';
+                userProfile.uid = user.uid;   // ✅ add UID
+                userProfile.avatar = user.photoURL;
+                userProfile.provider = user.providerData[0]?.providerId || 'firebase';
+                userProfile.joinDate = new Date(user.metadata.creationTime).toLocaleDateString();
+
+                // Load DSA progress from localStorage
+                loadUserProgress();
+                updateProfileUI();
+            } catch (error) {
+                console.error('Error loading Firebase user profile:', error);
+                loadDemoProfile();
+            }
+        }
+
+        // Function to load user data from different providers (legacy support)
+        async function loadUserProfile() {
+            // This will be handled by onAuthStateChanged now
+            // But keeping for backward compatibility
+            const currentUser = auth.currentUser;
+            if (currentUser) {
+                loadFirebaseUserProfile(currentUser);
+            } else {
+                loadDemoProfile();
+            }
+        }
+
+
+
+        // Load user's DSA progress from localStorage or backend
+        function loadUserProgress() {
+            const savedProgress = localStorage.getItem(`dsaProgress_${userProfile.username}`);
+            if (savedProgress) {
+                const progress = JSON.parse(savedProgress);
+                userProfile = { ...userProfile, ...progress };
+            } else {
+                // Generate some sample progress for new users
+                generateSampleProgress();
+            }
+        }
+
+        // Generate sample progress for demo/new users
+        function generateSampleProgress() {
+            userProfile.level = Math.floor(Math.random() * 15) + 1;
+            userProfile.xp = Math.floor(Math.random() * 2500) + 500;
+            userProfile.maxXp = userProfile.level * 250;
+            
+            userProfile.stats = {
+                problemsSolved: Math.floor(Math.random() * 300) + 50,
+                streak: Math.floor(Math.random() * 30) + 1,
+                achievements: Math.floor(Math.random() * 25) + 5,
+                studyTime: Math.floor(Math.random() * 100) + 20
+            };
+
+            userProfile.skills = {
+                'Arrays & Strings': Math.floor(Math.random() * 40) + 60,
+                'Trees & Graphs': Math.floor(Math.random() * 50) + 30,
+                'Dynamic Programming': Math.floor(Math.random() * 60) + 20,
+                'Sorting & Searching': Math.floor(Math.random() * 30) + 70,
+                'Linked Lists': Math.floor(Math.random() * 40) + 40,
+                'Recursion': Math.floor(Math.random() * 50) + 20
+            };
+
+            userProfile.recentActivity = [
+                { problem: 'Two Sum', category: 'Array', difficulty: 'Easy', status: 'completed', time: '2 hours ago' },
+                { problem: 'Binary Tree Inorder', category: 'Tree', difficulty: 'Medium', status: 'completed', time: '5 hours ago' },
+                { problem: 'Merge K Sorted Lists', category: 'Linked List', difficulty: 'Hard', status: 'in-progress', time: '1 day ago' },
+                { problem: 'Valid Parentheses', category: 'Stack', difficulty: 'Easy', status: 'completed', time: '2 days ago' }
+            ];
+
+            userProfile.achievements = [
+                { name: 'Binary Tree Master', description: 'Solved 50 tree problems', icon: '🥇', type: 'gold' },
+                { name: 'Speed Demon', description: 'Solved 10 problems in under 5 minutes', icon: '⚡', type: 'blue' },
+                { name: 'Perfect Week', description: '7 days of consistent practice', icon: '🎯', type: 'green' }
+            ];
+        }
+
+        // 🔥 EDIT THIS: Customize the demo profile shown when no user is logged in
+        function loadDemoProfile() {
+            userProfile.name = 'Alex Kumar'; // ← Change demo name
+            userProfile.username = 'alexkumar_dev'; // ← Change demo username
+            userProfile.email = 'alex@example.com'; // ← Change demo email
+            userProfile.provider = 'demo';
+            userProfile.joinDate = 'March 2024'; // ← Change demo join date
+            generateSampleProgress();
+            updateProfileUI();
+        }
+
+        // Update the UI with loaded profile data
+        function updateProfileUI() {
+            // Update name and username
+            document.querySelector('h2').textContent = userProfile.name;
+            document.querySelector('p').textContent = `@${userProfile.username}`;
+            
+            // Update avatar
+            const avatarElement = document.querySelector('.w-32.h-32');
+            if (userProfile.avatar) {
+                avatarElement.innerHTML = `<img src="${userProfile.avatar}" alt="Profile" class="w-full h-full rounded-full object-cover" onerror="this.style.display='none'; this.parentElement.innerHTML='${getInitials(userProfile.name)}';">`;
+            } else {
+                avatarElement.textContent = getInitials(userProfile.name);
+            }
+
+            // Update join date
+            document.querySelector('.text-gray-400').innerHTML = `🗓️ Joined ${userProfile.joinDate}`;
+
+            // Update level and XP
+            const xpPercentage = (userProfile.xp / userProfile.maxXp) * 100;
+            document.querySelector('.text-2xl.font-bold.text-indigo-300').textContent = `Level ${userProfile.level}`;
+            document.querySelector('.text-xs.text-gray-400').textContent = `${userProfile.xp.toLocaleString()} / ${userProfile.maxXp.toLocaleString()} XP`;
+            
+            // Update progress ring
+            const circumference = 2 * Math.PI * 54;
+            const offset = circumference - (xpPercentage / 100) * circumference;
+            document.querySelector('.progress-ring-circle').style.strokeDashoffset = offset;
+            document.querySelector('.absolute.inset-0 span').textContent = userProfile.level;
+
+            // Update XP progress bar
+            document.querySelector('.w-32.bg-gray-700 div').style.width = `${xpPercentage}%`;
+
+            // Update stats
+            const statValues = document.querySelectorAll('.text-3xl.font-bold');
+            statValues[0].textContent = userProfile.stats.problemsSolved;
+            statValues[1].textContent = `${userProfile.stats.streak} days`;
+            statValues[2].textContent = userProfile.stats.achievements;
+            statValues[3].textContent = `${userProfile.stats.studyTime}h`;
+
+            // Update skills progress
+            updateSkillsProgress();
+            
+            // Update recent activity
+            updateRecentActivity();
+            
+            // Update achievements
+            updateAchievements();
+
+            // Save progress to localStorage
+            localStorage.setItem(`dsaProgress_${userProfile.username}`, JSON.stringify(userProfile));
+        }
+
+        // Helper function to get initials
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').toUpperCase();
+        }
+
+        // Update skills progress bars
+        function updateSkillsProgress() {
+            const skillElements = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-2.lg\\:grid-cols-3 .space-y-3');
+            const skillNames = Object.keys(userProfile.skills);
+            
+            skillElements.forEach((element, index) => {
+                if (skillNames[index]) {
+                    const skillName = skillNames[index];
+                    const percentage = userProfile.skills[skillName];
+                    
+                    element.querySelector('.text-sm.text-gray-400').textContent = `${percentage}%`;
+                    element.querySelector('.bg-gradient-to-r').style.width = `${percentage}%`;
+                }
+            });
+        }
+
+        // Update recent activity
+        function updateRecentActivity() {
+            const activityContainer = document.querySelector('.space-y-4:last-child');
+            activityContainer.innerHTML = '';
+            
+            userProfile.recentActivity.forEach(activity => {
+                const statusColor = activity.status === 'completed' ? 'bg-green-500' : 'bg-yellow-500';
+                const statusIcon = activity.status === 'completed' ? '✓' : '⏸';
+                
+                const activityElement = document.createElement('div');
+                activityElement.className = 'flex items-center justify-between p-3 bg-black/20 rounded-lg';
+                activityElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 ${statusColor} rounded-full flex items-center justify-center text-sm">${statusIcon}</div>
+                        <div>
+                            <p class="font-medium">${activity.problem}</p>
+                            <p class="text-sm text-gray-400">${activity.category} • ${activity.difficulty}</p>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-400">${activity.time}</span>
+                `;
+                activityContainer.appendChild(activityElement);
+            });
+        }
+
+        // Update achievements
+        function updateAchievements() {
+            const achievementContainer = document.querySelector('.space-y-4:first-child');
+            achievementContainer.innerHTML = '';
+            
+            userProfile.achievements.forEach(achievement => {
+                const typeClass = {
+                    'gold': 'from-yellow-500/20 to-orange-500/20 border-yellow-500/30',
+                    'blue': 'from-blue-500/20 to-purple-500/20 border-blue-500/30',
+                    'green': 'from-green-500/20 to-teal-500/20 border-green-500/30'
+                };
+                
+                const achievementElement = document.createElement('div');
+                achievementElement.className = `${achievement.type === 'gold' ? 'achievement-glow ' : ''}bg-gradient-to-r ${typeClass[achievement.type]} rounded-lg p-4 border`;
+                achievementElement.innerHTML = `
+                    <div class="flex items-center space-x-3">
+                        <span class="text-2xl">${achievement.icon}</span>
+                        <div>
+                            <p class="font-semibold">${achievement.name}</p>
+                            <p class="text-sm text-gray-400">${achievement.description}</p>
+                        </div>
+                    </div>
+                `;
+                achievementContainer.appendChild(achievementElement);
+            });
+        }
+
+        // Firebase Authentication Functions
+        async function loginWithGitHub() {
+            try {
+                const provider = new GithubAuthProvider();
+                provider.addScope('user:email');
+                const result = await signInWithPopup(auth, provider);
+                console.log('GitHub login successful:', result.user);
+            } catch (error) {
+                console.error('GitHub login error:', error);
+                alert('GitHub login failed: ' + error.message);
+            }
+        }
+
+        async function loginWithGoogle() {
+            try {
+                const provider = new GoogleAuthProvider();
+                provider.addScope('profile');
+                provider.addScope('email');
+                const result = await signInWithPopup(auth, provider);
+                console.log('Google login successful:', result.user);
+            } catch (error) {
+                console.error('Google login error:', error);
+                alert('Google login failed: ' + error.message);
+            }
+        }
+
+        async function loginWithEmail(email, password) {
+            try {
+                const result = await signInWithEmailAndPassword(auth, email, password);
+                console.log('Email login successful:', result.user);
+            } catch (error) {
+                console.error('Email login error:', error);
+                alert('Email login failed: ' + error.message);
+            }
+        }
+
+        async function signUpWithEmail(email, password, displayName) {
+            try {
+                const result = await createUserWithEmailAndPassword(auth, email, password);
+                // Update the user's display name
+                await updateProfile(result.user, {
+                    displayName: displayName
+                });
+                console.log('Email signup successful:', result.user);
+            } catch (error) {
+                console.error('Email signup error:', error);
+                alert('Email signup failed: ' + error.message);
+            }
+        }
+
+        async function resetPassword(email) {
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert('Password reset email sent!');
+            } catch (error) {
+                console.error('Password reset error:', error);
+                alert('Password reset failed: ' + error.message);
+            }
+        }
+
+      
+
+        // Add interactive hover effects
+        document.querySelectorAll('.stat-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'transform 0.2s ease';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animate progress bars on load
+        window.addEventListener('load', () => {
+            // Load user profile first
+            loadUserProfile();
+            
+            // Then animate progress bars
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('[style*="width:"]');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.transition = 'width 1s ease-out';
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 500);
+        });
+
+        // Expose Firebase auth functions globally for potential use
+        window.dsaAuth = {
+            loginWithGitHub,
+            loginWithGoogle,
+            loginWithEmail,
+            signUpWithEmail,
+            resetPassword,
+            logout,
+            loadUserProfile,
+            auth
+        };
+
+  // 🔒 Protect profile page → redirect to home.html if not logged in
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "home.html";
+    }
+  });
+
+  // 🚪 Logout function → redirect to home.html after logout
+  async function logout() {
+    try {
+      await signOut(auth);
+      console.log("User signed out successfully");
+      window.location.href = "home.html";
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("Logout failed: " + error.message);
+    }
+  }
+
+  // Make logout available to HTML buttons
+  window.logout = logout;
+    </script>
+   
+    
+      
+  
+      
+    
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97856dd970553f03',t:'MTc1NjczNjY0NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
